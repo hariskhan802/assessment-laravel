@@ -1,0 +1,61 @@
+
+<div class="row film-form-wrap" ng-init="getCounties();getGenres()">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Create Film</h2>
+		<form method="post"  enctype="multipart/form-data" ng-submit="createFilm()">
+			<div class="form-group">
+				<label>Name</label>
+				<input type="text" class="form-control" name="name" ng-model="film.name">
+				<span class="error-msg" ng-repeat="error in errors.name">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Description</label>
+				<textarea class="form-control" name="description" ng-model="film.description"></textarea>
+				<span class="error-msg" ng-repeat="error in errors.description">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Release Date</label>
+				<input type="text" class="form-control " name="release_date" ng-model="film.release_date">
+				<span class="error-msg" ng-repeat="error in errors.release_date">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Rating</label>
+				<input type="number" class="form-control" name="rating" ng-model="film.rating">
+				<span class="error-msg" ng-repeat="error in errors.rating">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Ticket Price</label>
+				<input type="number" class="form-control" name="ticket_price" ng-model="film.ticket_price">
+				<span class="error-msg" ng-repeat="error in errors.ticket_price">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Country</label>
+				<select class="form-control" name="country_id" ng-model="film.country_id">
+					<option value="">Select Country</option>
+					<option ng-repeat="country in countries" value="{{ country.id }}">{{ country.name }}</option>
+				</select>
+				<span class="error-msg" ng-repeat="error in errors.country_id">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Genre</label>
+				<select class="form-control" name="genre_id[]" ng-model="film.genre_id" multiple>
+					<option value="">Select Genre</option>
+					<option ng-repeat="genre in genres" value="{{ genre.id }}">{{ genre.name }}</option>
+				</select>
+				<span class="error-msg" ng-repeat="error in errors.genre_id">{{ error }}</span>
+			</div>	
+			<div class="form-group">
+				<label>Photo</label>
+				<input type="file"  name="photo" ng-model="film.photo" accept="image/*" file-input="film.photo">
+				<span class="error-msg" ng-repeat="error in errors.photo">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary pull-right" name="submit" >
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('[ name="release_date"]').datepicker();
+</script>

@@ -1,0 +1,18 @@
+<div class="container-fluid">
+				
+	<ul class="nav navbar-nav">
+		<li  ui-sref-active="active"><a  ui-sref="films" >Films</a></li>
+		<li ui-sref-active="active"><a  ui-sref="films-create" >Create Film</a></li>
+		<li ui-sref-active="active" ng-if="!checkUserLoggedIn()"><a  ui-sref="login">Login</a></li>
+		<li ui-sref-active="active" ng-if="!checkUserLoggedIn()"><a  ui-sref="register">Register</a></li>
+		<li ui-sref-active="active" class="dropdown" ng-if="checkUserLoggedIn()">
+			<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">
+				<i class="glyphicon glyphicon-user"></i> 
+				{{ user.name }}
+			</a>
+			<ul class="dropdown-menu">
+                <li ng-click="logout()"><a href="javascript:;">Logout</a></li>
+            </ul>
+		</li>
+	</ul>
+</div>

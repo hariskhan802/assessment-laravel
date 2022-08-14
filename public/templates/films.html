@@ -1,0 +1,52 @@
+	
+
+	<div class="row films-wrap" ng-init="fetchFilms()">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+						<td>Description</td>
+						<td>Release Date</td>
+						<td>Rating</td>
+						<td>Ticket Price</td>
+						<td>Country</td>
+						<td>Genre</td>
+						<td>Photo</td>
+						<td>View</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="film in films.data">
+						<td>{{ film.id }}</td>
+						<td>{{ film.name }}</td>
+						<td>{{ film.description }}</td>
+						<td>{{ film.release_date }}</td>
+						<td>{{ film.rating }}</td>
+						<td>{{ '$'+film.ticket_price }}</td>
+						<td>{{ film.country.name }}</td>
+						<td>
+							<span ng-repeat="genre in film.genres">
+								{{ genre.name }}
+								{{ ($index+1) < film.genres.length ? ',' : '' }}
+							</span>
+						</td>
+						<td><img src="{{ baseURL+'/images/'+film.photo }}" width="100"></td>
+						<td><a ui-sref="film-detail({slug:film.slug})" class="btn btn-primary">View</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item" ng-if="curPage > 1"  ng-click="fetchFilms(curPage-1)"><a class="page-link" href="javascript:;">Previous</a></li>
+
+				<li class="page-item {{ page == curPage ? 'active' : '' }} " ng-repeat="page in totalPages" ng-click="fetchFilms(page)"><a class="page-link" href="javascript:;">{{ page }}</a></li>
+				<li class="page-item" ng-if="curPage != totalPages.length"  ng-click="fetchFilms(curPage+1)"><a class="page-link" href="javascript:;">Next</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+
+	
