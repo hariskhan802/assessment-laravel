@@ -1,0 +1,37 @@
+
+<div class="row film-form-wrap">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Register</h2>
+		<form method="post"  enctype="multipart/form-data" ng-submit="register()">
+			<div class="form-group">
+				<label>Name</label>
+				<input type="name" class="form-control" name="name" ng-model="user.name">
+				<span class="error-msg" ng-repeat="error in errors.name">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="email" class="form-control" name="email" ng-model="user.email">
+				<span  class="error-msg" ng-repeat="error in errors.email">{{ error }}</span>
+			</div>
+			
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control " name="password" ng-model="user.password">
+				<span   class="error-msg" ng-repeat="error in errors.password">{{ error }}</span>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary pull-right" name="submit" value="Register" >
+			</div>
+		</form>
+		
+	</div>
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-success" ng-if="success">
+			<h4>{{ success }}</h4>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('[ name="release_date"]').datepicker();
+</script>

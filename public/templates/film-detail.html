@@ -1,0 +1,56 @@
+<div class="film-detail-wrap" ng-init="filmDetail()" >
+	<div class="film-detail-sub" ng-if="filmData">
+		<div class="row "  >
+			<div class="col-md-4">
+				
+				<img src="{{ baseURL+'/images/'+filmData.photo }}" width="200">
+				<h2>{{filmData.name}}</h2>
+				<p>{{'$'+filmData.ticket_price}}</p>
+				<p>
+					<span ng-repeat="genre in filmData.genres">
+						{{ genre.name }}
+						{{ ($index+1) < filmData.genres.length ? ',' : '' }}
+					</span>
+				</p>
+				<p>{{filmData.country.name}}</p>
+			</div>
+
+		</div>
+		<div class="row film-comment" >
+			<div class="col-md-4">
+				<div class="post-wrap" ng-if="checkUserLoggedIn()">
+					<form method="post" ng-submit="postComment(filmData.id, user.id)">
+						<div class="form-group">
+							<textarea  name="comment" ng-model="commentw.comment" class="form-control" placeholder="Write Comment"></textarea>
+						</div>
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary pull-right" name="submit" value="Post" >
+						</div>
+
+					</form>
+				</div>
+				<div class="login-post-wrap" ng-if="!checkUserLoggedIn()">
+					<a  ui-sref="login" class="btn btn-primary">Login to Write Comment</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-4">
+			<div class="alert alert-danger" ng-if="error">
+				<h4>{{ error[0] }}</h4>
+			</div>
+			<div class="alert alert-success" ng-if="success">
+				<h4>{{ success }}</h4>
+			</div>
+		</div>
+		<div class="row film-comments-wrap" >
+			<div class="col-md-4">
+				<div class="comment-wrap" ng-repeat="comment in filmData.comments">
+					<h3>{{comment.comment}}</h3>
+					<p>{{ comment.created_at }}</p>
+					<p>{{ comment.user.name }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
