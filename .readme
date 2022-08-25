@@ -1,4 +1,4 @@
 1. Clone project from github
-2. Run commad composer install
-3. Migrate the table and seed
+2. Run commad "composer install"
+3. Migrate the table and seed "php artisan migrate --seed"
 4. php artisan passport:install (Note: whenever migrate the tables you need to run this command)
