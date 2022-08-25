@@ -11,6 +11,7 @@ use App\{
 	Genre,
 	FilmGenre,
 };
+use Response;
 class FilmController extends Controller
 {
     
@@ -28,9 +29,9 @@ class FilmController extends Controller
         		}
         		$response = ['status' => true, 'status_code' => 200, 'msg' => 'Film created successfully!'];
         	}
-            return response()->json($response, $response['status_code']);
+            return Response::json($response, $response['status_code']);
 		}catch(\Exception $e){
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+            return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
     
@@ -43,9 +44,9 @@ class FilmController extends Controller
         		$query->select(['id', 'name']);
         	}])->orderBy('id', 'DESC')->paginate(1); 
             $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
-            return response()->json($response, $response['status_code']);
+            return Response::json($response, $response['status_code']);
         }catch(\Exception $e){
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+            return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
 
@@ -56,9 +57,9 @@ class FilmController extends Controller
         		$query->select(['comment', 'film_id', 'id', 'created_at', 'user_id'])->orderBy('id', 'DESC');
         	}, 'comments.user:id,name', 'genres:id,name', 'country:id,name'])->first();
             $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
-            return response()->json($response, $response['status_code']);
+            return Response::json($response, $response['status_code']);
         }catch(\Exception $e) {
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+            return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
     
@@ -67,9 +68,9 @@ class FilmController extends Controller
         try {
         	$data = Country::select(['id', 'name'])->get();
             $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
-            return response()->json($response, $response['status_code']);
+            return Response::json($response, $response['status_code']);
         }catch(\Exception $e) {
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+            return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
 
@@ -78,9 +79,9 @@ class FilmController extends Controller
         try {
         	$data = Genre::select(['id', 'name'])->get();
             $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
-            return response()->json($response, $response['status_code']);
+            return Response::json($response, $response['status_code']);
         }catch(\Exception $e) {
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+            return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
 

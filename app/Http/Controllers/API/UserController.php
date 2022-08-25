@@ -16,7 +16,7 @@ class UserController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password ])){ 
             $response = ['status' => true, 'token' => Auth::user()->createToken('MyApp')->accessToken, 'status_code' => 200, 'user' => Auth::user(), 'msg' => 'Logged in successfully'];
         } 
-        return response()->json($response, $response['status_code']); 
+        return Response::json($response, $response['status_code']); 
         
     }
 
