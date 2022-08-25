@@ -64,17 +64,16 @@
 		});
 
 		app.controller('filmController', function($scope, $http, $stateParams, $timeout, $state, $window, $rootScope){
-			// alert('asa')
 			
 			$scope.baseURL = '<?php echo e(url('')); ?>';
 			$scope.success = '';
 			$scope.error = '';
 			
 			$scope.fetchFilms = function(page = 1){
-				$http.get('<?php echo e(route("films")."?page="); ?>'+page).success(function(data){
+				$http.get('<?php echo e(route("films")."?page="); ?>'+page).success(function(response){
 					$scope.curPage = page;
-					$scope.films = data;
-					$scope.totalPages = Array.from({length: data.total}, (_, i) => i + 1);
+					$scope.films = response.data;
+					$scope.totalPages = Array.from({length: response.data.total}, (_, i) => i + 1);
  
 				});
 			};
@@ -106,22 +105,22 @@
 			}
 			
 			$scope.getCounties = function() {
-				$http.get('<?php echo e(route("get-countries")); ?>').success(function(data){
-					$scope.countries = data;
+				$http.get('<?php echo e(route("get-countries")); ?>').success(function(response){
+					$scope.countries = response.data;
 				});
 			}
 			$scope.getGenres = function() {
-				$http.get('<?php echo e(route("get-genres")); ?>').success(function(data){
-					$scope.genres = data;
+				$http.get('<?php echo e(route("get-genres")); ?>').success(function(response){
+					$scope.genres = response.data;
 				});
 			}
 			$scope.filmDetail = function() {
-				$http.get($scope.baseURL+'/api/films/'+$stateParams.slug).success(function(data){
-					if(!data) {
+				$http.get($scope.baseURL+'/api/films/'+$stateParams.slug).success(function(response){
+					if(!response.data) {
 						$state.go('films');
 					}
 
-					$scope.filmData = data;
+					$scope.filmData = response.data;
 				});
 
 			}

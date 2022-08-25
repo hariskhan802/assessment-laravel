@@ -17,11 +17,10 @@ class FilmController extends Controller
     // Create the film
     public function create(FilmRequest $request) {
         try {
-            
-        	$data = $request->except('genre_id');
-        	$genre_ids = explode(',', $request->genre_id);
-        	$data['photo'] = $this->upload_image($request['photo']);
-        	$data['slug'] = $this->make_slug($request->name);
+            $data = $request->except('genre_id');
+        	$genre_ids = explode(',', $reques->genre_id);
+        	$data['photo'] = upload_image($request['photo']);
+        	$data['slug'] = make_slug($request->name);
             $response = ['status' => false, 'status_code' => 502, 'msg' => 'Something went wrong!'];
         	if($film = Film::create($data)) {
         		foreach ($genre_ids as $key => $genre_id) {
@@ -30,51 +29,60 @@ class FilmController extends Controller
         		$response = ['status' => true, 'status_code' => 200, 'msg' => 'Film created successfully!'];
         	}
             return response()->json($response, $response['status_code']);
-		}catch(Exception $e){
-            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => 'Something went wrong!'], 500);;
+		}catch(\Exception $e){
+            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
     
     // Get the records of films
     public function index() {
-    	return Film::with(['genres' => function($query){
-    		$query->select(['id', 'name']);
-    	}, 'country' => function($query){
-    		$query->select(['id', 'name']);
-    	}])->orderBy('id', 'DESC')->paginate(1); 
+        try {
+        	$data = Film::with(['genres' => function($query){
+        		$query->select(['id', 'name']);
+        	}, 'country' => function($query){
+        		$query->select(['id', 'name']);
+        	}])->orderBy('id', 'DESC')->paginate(1); 
+            $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
+            return response()->json($response, $response['status_code']);
+        }catch(\Exception $e){
+            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+        }
     }
 
-    // Single Film function
+    // Get the single film
     public function film($slug) {
-    	return Film::where(['slug' => $slug])->with(['comments' => function($query){
-    		$query->select(['comment', 'film_id', 'id', 'created_at', 'user_id'])->orderBy('id', 'DESC');
-    	}, 'comments.user:id,name', 'genres:id,name', 'country:id,name'])->first(); 
+        try {
+        	$data = Film::where(['slug' => $slug])->with(['comments' => function($query){
+        		$query->select(['comment', 'film_id', 'id', 'created_at', 'user_id'])->orderBy('id', 'DESC');
+        	}, 'comments.user:id,name', 'genres:id,name', 'country:id,name'])->first();
+            $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
+            return response()->json($response, $response['status_code']);
+        }catch(\Exception $e) {
+            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+        }
     }
     
-    // Country function
+    // Get the countries
     public function get_countries() {
-    	return Country::select(['id', 'name'])->get();
-    }
-
-    // Genre function
-    public function get_genres() {
-    	return Genre::select(['id', 'name'])->get();
-    }
-
-    private function upload_image($image) {
-	    $file = $image;
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'-'.uniqid().'.'.$extension;
-        $file->move('images', $filename);
-        return $filename;	
-    }
-    // Generate unique slug
-    function make_slug($name, $number = 1){
-        $slug = str_slug($name);
-        if(Film::where(['slug' => $slug])->count() > 0) {
-            return $this->make_slug($name.$number, $number + 1);
+        try {
+        	$data = Country::select(['id', 'name'])->get();
+            $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
+            return response()->json($response, $response['status_code']);
+        }catch(\Exception $e) {
+            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
-        return $slug;
-        
     }
+
+    // Get the genres
+    public function get_genres() {
+        try {
+        	$data = Genre::select(['id', 'name'])->get();
+            $response = ['status' => true, 'status_code' => 200, 'data' => $data ];
+            return response()->json($response, $response['status_code']);
+        }catch(\Exception $e) {
+            return  response()->json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
+    
 }
