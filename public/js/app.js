@@ -221,6 +221,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 		$scope.checkUserLoggedIn()
 	});
 });
+// Make director Image Upload
 app.directive("fileInput", function($parse){
 
 	return{

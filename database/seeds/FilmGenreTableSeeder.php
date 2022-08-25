@@ -9,8 +9,10 @@ class FilmGenreTableSeeder extends Seeder
      *
      * @return void
      */
+
+    // Create seeder for film genre
     public function run()
     {
-        factory(App\FilmGenre::class, 3)->create();
+        factory(App\FilmGenre::class, 10)->create();
     }
 }

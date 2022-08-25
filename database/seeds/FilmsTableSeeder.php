@@ -9,6 +9,7 @@ class FilmsTableSeeder extends Seeder
      *
      * @return void
      */
+    // // Create seeder for film
     public function run()
     {
         //

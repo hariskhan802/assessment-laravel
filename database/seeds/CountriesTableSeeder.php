@@ -9,6 +9,8 @@ class CountriesTableSeeder extends Seeder
      *
      * @return void
      */
+
+    // Create seeder for country
     public function run()
     {
         factory(App\Country::class, 3)->create();

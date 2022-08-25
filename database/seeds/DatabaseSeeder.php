@@ -11,15 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        // Excute seeder for demo data
         $this->call([
             UsersTableSeeder::class,
             GenresTableSeeder::class,
             CountriesTableSeeder::class,
             FilmsTableSeeder::class,
             FilmGenreTableSeeder::class,
-            // CommentsTableSeeder::class,
-            // GenresTableSeeder::class,
         ]);
         
     }

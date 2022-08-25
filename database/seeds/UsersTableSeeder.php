@@ -9,6 +9,7 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
+    // Create seeder for user
     public function run()
     {
         factory(App\User::class, 3)->create();

@@ -8,11 +8,7 @@
 	
 	<base href="/assessment-laravel/public/">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<style type="text/css">
-		.error-msg{
-			color: red;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 	<script type="text/javascript">
 		var baseURL = "{{url('')}}";
 	</script>

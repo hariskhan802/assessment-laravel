@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-
+// Create factory for film
 $factory->define(App\Film::class, function (Faker $faker) {
     $filmName = $faker->name;
     return [
