@@ -1,1 +1,4 @@
-composer install
+1. Clone project from github
+2. Run commad composer install
+3. Migrate the table and seed
+4. php artisan passport:install

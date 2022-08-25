@@ -1,46 +1,49 @@
 
 var app = angular.module('my-app', ['ui.router', 'ui.router.state.events']);
 
+// Application frontend routes
 app.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 	
 	$stateProvider
-		.state('films', {
+		.state('films', { // films route
 			url: '/films',
 			templateUrl: 'templates/films.html',
 			controller: 'filmController'
 		})
-		.state('films-create', {
+		.state('films-create', { // films create route
 			url: '/films/create',
 			templateUrl: 'templates/films-create.html',
 			controller: 'filmController'
 		})
-		.state('film-detail', {
+		.state('film-detail', { // film detail route
 			url: '/films/:slug',
 			templateUrl: 'templates/film-detail.html',
 			controller: 'filmController'
 		})
-		.state('register', {
+		.state('register', { // User register route
 			url: '/register',
 			templateUrl: 'templates/register.html',
 			controller: 'filmController'
 		})
-		.state('login', {
+		.state('login', { // Authentication route
 			url: '/login',
 			templateUrl: 'templates/login.html',
 			controller: 'filmController'
 		});
-	
+	// It is added for removing hash from the URL 
 	$locationProvider.html5Mode(true);
+	// Redirection if any on base url to redirect /films url
 	$urlRouterProvider.when('/','/films');
 
 });
-
+// FilmController
 app.controller('filmController', function($scope, $http, $stateParams, $timeout, $state, $window, $rootScope){
 	
 	$scope.baseURL = baseURL;
 	$scope.success = '';
 	$scope.error = '';
 	
+	// Fetch the films and make pagination
 	$scope.fetchFilms = function(page = 1){
 		$http.get($scope.baseURL+"/api/films?page="+page).success(function(response){
 			$scope.curPage = page;
@@ -50,6 +53,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 		});
 	};
 
+	// Create the films
 	$scope.createFilm = function() {
 		var fd = new FormData();
 		var filmData = $scope.film;
@@ -75,17 +79,19 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 	 	});
 
 	}
-	
+	// fetch the countries api and showing in dropdown
 	$scope.getCounties = function() {
 		$http.get($scope.baseURL+'/api/get-countries').success(function(response){
 			$scope.countries = response.data;
 		});
 	}
+	// fetch the Genres api and showing in dropdown
 	$scope.getGenres = function() {
 		$http.get($scope.baseURL+'/api/get-genres').success(function(response){
 			$scope.genres = response.data;
 		});
 	}
+	// Fetch the film and showing
 	$scope.filmDetail = function() {
 		$http.get($scope.baseURL+'/api/films/'+$stateParams.slug).success(function(response){
 			if(!response.data) {
@@ -96,7 +102,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 		});
 
 	}
-	
+	// Register the user
 	$scope.register = function() {
 		
 		var fd = new FormData();
@@ -126,6 +132,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 	 		$scope.errors = errors.data.errors;
 	 	});
 	}
+	// Login the user
 	$scope.login = function() {
 		
 		var fd = new FormData();
@@ -156,6 +163,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 	 		$scope.error = errors.data.msg;
 	 	});
 	}
+	// Logout the user
 	$scope.logout = function() {
 		$http.get($scope.baseURL+"/api/logout", {
 		    headers: {'Authorization': 'Bearer '+$scope.user_token}
@@ -171,6 +179,7 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 			}
 		});
 	}
+	// Post the comment
 	$scope.commentw = {};
 	$scope.postComment = function(filmID, userID) {
 		
@@ -201,15 +210,15 @@ app.controller('filmController', function($scope, $http, $stateParams, $timeout,
 	 		$scope.error = response.data.errors.comment;
 	 	});
 	}
+	// check either user login or not
 	$scope.checkUserLoggedIn = function() {
 		$scope.user_token = $window.sessionStorage.getItem('user_token');
 		$scope.user = $window.sessionStorage.getItem('user') ? JSON.parse($window.sessionStorage.getItem('user')) : '';
 		return $scope.user_token != null && $scope.user_token != '';
 	}
-		// console.log($state);
+	// check either user login or not when user change the route
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 		$scope.checkUserLoggedIn()
-		// $state.go('films');
 	});
 });
 app.directive("fileInput", function($parse){
