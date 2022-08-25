@@ -225,8 +225,8 @@
 			 			$scope.commentw.comment = '';
 			 			$scope.filmDetail();
 			 		}
-			 	}, function(errors){
-			 		$scope.error = errors.data.comment;
+			 	}, function(response){
+			 		$scope.error = response.data.errors.comment;
 			 	});
 			}
 			$scope.checkUserLoggedIn = function() {

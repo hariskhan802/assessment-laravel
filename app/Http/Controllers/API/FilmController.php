@@ -20,8 +20,8 @@ class FilmController extends Controller
         try {
             $data = $request->except('genre_id');
         	$genre_ids = explode(',', $request->genre_id);
-        	$data['photo'] = upload_image($request['photo']);
-        	$data['slug'] = make_slug($request->name);
+        	$data['photo'] = upload_image($request['photo']); // upload_image is in helpers.php, for uploading image
+        	$data['slug'] = make_slug($request->name); // make_slug is in helpers.php, It is made for making unique slug
             $response = ['status' => false, 'status_code' => 502, 'msg' => 'Something went wrong!'];
         	if($film = Film::create($data)) {
         		foreach ($genre_ids as $key => $genre_id) {

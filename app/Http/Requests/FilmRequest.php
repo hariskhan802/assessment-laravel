@@ -23,11 +23,10 @@ class FilmRequest extends FormRequest
      */
     public function rules()
     {
-        
+        // Validate the film create request call
         return [
             //
             'name' => 'required',
-            // 'slug' => 'required|unique:films',
             'description' => 'required',
             'release_date' => 'required',
             'rating' => 'required|numeric|min:1|max:5',

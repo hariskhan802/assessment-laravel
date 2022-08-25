@@ -22,6 +22,7 @@ Route::post('register', 'API\UserController@register')->name('register');
 Route::group(['middleware' => 'auth:api'], function(){
 	// Comment Post Route
 	Route::post('post-comment', 'API\CommentController@post_comment')->name('post-comment');
+	// User Logout Route
 	Route::get('logout', 'API\UserController@logout')->name('logout');
 });
 Route::group(['prefix' => 'films'], function(){
