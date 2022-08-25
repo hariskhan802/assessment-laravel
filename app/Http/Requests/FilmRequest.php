@@ -23,17 +23,15 @@ class FilmRequest extends FormRequest
      */
     public function rules()
     {
-        // request()->merge(['slug' => request('name')]);
-        // dd(request()->all());
-        // request()->set('slug') = str_slug();
+        
         return [
             //
             'name' => 'required',
             // 'slug' => 'required|unique:films',
             'description' => 'required',
             'release_date' => 'required',
-            'rating' => 'required',
-            'ticket_price' => 'required',
+            'rating' => 'required|numeric|min:1|max:5',
+            'ticket_price' => 'required|numeric|min:1',
             'country_id' => 'required',
             'photo' => 'required|mimes:jpeg,jpg,png,gif|required|max:1000',
             'genre_id' => 'required'

@@ -13,6 +13,7 @@ return array(
     'App\\Film' => $baseDir . '/app/Film.php',
     'App\\FilmGenre' => $baseDir . '/app/FilmGenre.php',
     'App\\Genre' => $baseDir . '/app/Genre.php',
+    'App\\Http\\Controllers\\API\\CommentController' => $baseDir . '/app/Http/Controllers/API/CommentController.php',
     'App\\Http\\Controllers\\API\\FilmController' => $baseDir . '/app/Http/Controllers/API/FilmController.php',
     'App\\Http\\Controllers\\API\\UserController' => $baseDir . '/app/Http/Controllers/API/UserController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',

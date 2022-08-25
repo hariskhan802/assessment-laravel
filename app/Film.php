@@ -12,11 +12,7 @@ class Film extends Model
     {
         return $this->belongsToMany('App\Genre');
     }
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-        $this->attributes['slug'] = str_slug($value).'-'.time().uniqid();
-    }
+    
     public function setReleaseDateAttribute($value)
     {
         $this->attributes['release_date'] = \Carbon\Carbon::parse($value)->format('Y-m-d');

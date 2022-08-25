@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
+class ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -194,8 +194,8 @@ class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Zend\\Diactoros\\' => 
         array (
@@ -343,8 +343,8 @@ class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -412,8 +412,8 @@ class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
         ),
         'Illuminate\\Notifications\\' => 
         array (
-            0 => __DIR__ . '/..' . '/laravel/nexmo-notification-channel/src',
-            1 => __DIR__ . '/..' . '/laravel/slack-notification-channel/src',
+            0 => __DIR__ . '/..' . '/laravel/slack-notification-channel/src',
+            1 => __DIR__ . '/..' . '/laravel/nexmo-notification-channel/src',
         ),
         'Illuminate\\' => 
         array (
@@ -537,6 +537,7 @@ class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
         'App\\Film' => __DIR__ . '/../..' . '/app/Film.php',
         'App\\FilmGenre' => __DIR__ . '/../..' . '/app/FilmGenre.php',
         'App\\Genre' => __DIR__ . '/../..' . '/app/Genre.php',
+        'App\\Http\\Controllers\\API\\CommentController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CommentController.php',
         'App\\Http\\Controllers\\API\\FilmController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/FilmController.php',
         'App\\Http\\Controllers\\API\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -4830,11 +4831,11 @@ class ComposerStaticInitc52cc16ba690e25226d0412edc0473e1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc52cc16ba690e25226d0412edc0473e1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc52cc16ba690e25226d0412edc0473e1::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitc52cc16ba690e25226d0412edc0473e1::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc52cc16ba690e25226d0412edc0473e1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc52cc16ba690e25226d0412edc0473e1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb0ec7f7d3c1439a3f3fad81ef4330708::$classMap;
 
         }, null, ClassLoader::class);
     }

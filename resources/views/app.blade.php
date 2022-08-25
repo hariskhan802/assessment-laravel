@@ -29,7 +29,7 @@
 	<script type="text/javascript">
 		var app = angular.module('my-app', ['ui.router', 'ui.router.state.events']);
 
-		app.config(function($stateProvider, $locationProvider) {
+		app.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 			
 			$stateProvider
 				.state('films', {
@@ -59,6 +59,8 @@
 				});
 			
 			$locationProvider.html5Mode(true);
+			$urlRouterProvider.when('/','/films');
+
 		});
 
 		app.controller('filmController', function($scope, $http, $stateParams, $timeout, $state, $window, $rootScope){
@@ -233,8 +235,10 @@
 				$scope.user = $window.sessionStorage.getItem('user') ? JSON.parse($window.sessionStorage.getItem('user')) : '';
 				return $scope.user_token != null && $scope.user_token != '';
 			}
+				// console.log($state);
 			$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 				$scope.checkUserLoggedIn()
+				// $state.go('films');
 			});
 		});
 		app.directive("fileInput", function($parse){

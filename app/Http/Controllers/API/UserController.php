@@ -12,7 +12,7 @@ use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function login(Request $request){
-    	$response = ['status' => false, 'token' => '', 'status_code' => 401, 'msg' => 'Email or password is incorrent!'];
+    	$response = ['status' => false, 'token' => '', 'status_code' => 401, 'msg' => 'Email or password is incorrect!'];
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password ])){ 
             $response = ['status' => true, 'token' => Auth::user()->createToken('MyApp')->accessToken, 'status_code' => 200, 'user' => Auth::user(), 'msg' => 'Logged in successfully'];
         } 
