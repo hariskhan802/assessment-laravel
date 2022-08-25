@@ -12,6 +12,7 @@ use Response;
 
 class UserController extends Controller
 {
+    // Authenticate the user
     public function login(Request $request){
         try {
         	$response = ['status' => false, 'token' => '', 'status_code' => 401, 'msg' => 'Email or password is incorrect!'];
@@ -23,7 +24,7 @@ class UserController extends Controller
             return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
-
+    // Register the user
     public function register(UserRequest $request) 
     {
         try {
@@ -36,11 +37,12 @@ class UserController extends Controller
             return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }
     }
+    // Logout the user
     public function logout() {
         try {
             $user = Auth::user()->token();
             $user->revoke();
-            return 'logged out';
+            return  Response::json(['status' => true, 'status_code' => 200, 'msg' => 'Logout successfully'], 200);
         }catch(\Exception $e){
             return  Response::json(['status' => false, 'status_code' => 500, 'msg' => $e->getMessage()], 500);
         }

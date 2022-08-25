@@ -188,7 +188,7 @@
 				$http.get('{{ route("logout") }}', {
 				    headers: {'Authorization': 'Bearer '+$scope.user_token}
 				}).success(function(data){
-					if (data == 'logged out') {
+					if (data.status === true) {
 						$window.sessionStorage.setItem('user_token', '');
 						$window.sessionStorage.setItem('user', '');
 					}
