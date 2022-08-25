@@ -19,7 +19,7 @@ class FilmController extends Controller
     public function create(FilmRequest $request) {
         try {
             $data = $request->except('genre_id');
-        	$genre_ids = explode(',', $reques->genre_id);
+        	$genre_ids = explode(',', $request->genre_id);
         	$data['photo'] = upload_image($request['photo']);
         	$data['slug'] = make_slug($request->name);
             $response = ['status' => false, 'status_code' => 502, 'msg' => 'Something went wrong!'];

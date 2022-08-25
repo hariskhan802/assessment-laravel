@@ -5,7 +5,7 @@
     function make_slug($name, $number = 1){
         $slug = str_slug($name);
         if(Film::where(['slug' => $slug])->count() > 0) {
-            return $this->make_slug($name.$number, $number + 1);
+            return make_slug($name.$number, $number + 1);
         }
         return $slug;
     }

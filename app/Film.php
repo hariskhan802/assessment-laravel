@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Film extends Model
 {
     
-	protected $guarded = ['id'];
+	protected $fillable = ['name', 'slug', 'description', 'release_date', 'rating', 'ticket_price', 'country_id', 'photo'];
     public function genres()
     {
         return $this->belongsToMany('App\Genre');
